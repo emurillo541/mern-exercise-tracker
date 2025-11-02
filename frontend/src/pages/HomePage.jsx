@@ -1,53 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ExerciseTable from '../components/ExerciseTable.jsx';
-import { API_BASE_URL } from '../config.js';
 
 const HomePage = () => {
   const [exercises, setExercises] = useState([]);
-
-  const fetchExercises = async () => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/exercises`);
-      const data = await res.json();
-      setExercises(data);
-    } catch (e) {
-      console.error('Fetch error:', e);
-    }
-  };
-
-  const deleteExercise = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this exercise?");
-    if (!confirmDelete) return;
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/exercises/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        let errData = {};
-        try {
-          errData = await response.json();
-        } catch (_) {}
-        console.error('Failed to delete exercise:', errData);
-        alert("Failed to delete exercise: " + (errData?.Error || response.status));
-        return;
-      }
-
-      setExercises((prev) => prev.filter((e) => String(e._id) !== String(id)));
-    } catch (err) {
-      console.error('Delete error:', err);
-      alert('Error deleting exercise.');
-    }
-  };
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
+    const fetchExercises = async () => {
+      try {
+        const res = await fetch(`${API_URL}/exercises`);
+        if (!res.ok) throw new Error('Failed to fetch exercises');
+        const data = await res.json();
+        setExercises(data);
+      } catch (err) {
+        console.error('Fetch error:', err);
+        alert('Failed to load exercises');
+      }
+    };
+
     fetchExercises();
-  }, []);
+  }, [API_URL]);
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this exercise?')) return;
+
+    try {
+      const res = await fetch(`${API_URL}/exercises/${id}`, { method: 'DELETE' });
+      if (res.status === 204) {
+        setExercises(exercises.filter((ex) => ex._id !== id));
+        alert('Deleted successfully');
+      } else {
+        const error = await res.json();
+        alert('Failed to delete exercise: ' + (error?.Error || res.status));
+      }
+    } catch (err) {
+      console.error('Delete error:', err);
+      alert('Failed to delete exercise.');
+    }
+  };
 
   return (
     <section>
-      <ExerciseTable exercises={exercises} onDelete={deleteExercise} />
+      <h1>All Exercises</h1>
+      <ExerciseTable exercises={exercises} onDelete={handleDelete} />
     </section>
   );
 };

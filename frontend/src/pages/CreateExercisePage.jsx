@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../config.js';
 
 const CreateExercisePage = () => {
   const navigate = useNavigate();
@@ -11,6 +10,8 @@ const CreateExercisePage = () => {
     unit: 'lbs',
     date: '',
   });
+
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setExercise({ ...exercise, [e.target.name]: e.target.value });
@@ -31,7 +32,7 @@ const CreateExercisePage = () => {
     };
 
     try {
-      const res = await fetch(`${API_BASE_URL}/exercises`, {
+      const res = await fetch(`${API_URL}/exercises`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -40,7 +41,8 @@ const CreateExercisePage = () => {
       if (res.status === 201) {
         alert('Exercise created successfully!');
       } else {
-        alert('Failed to create exercise.');
+        const error = await res.json();
+        alert('Failed to create exercise: ' + (error?.Error || res.status));
       }
     } catch (err) {
       console.error('Create error:', err);

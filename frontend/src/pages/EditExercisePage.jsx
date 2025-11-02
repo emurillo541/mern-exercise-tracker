@@ -6,11 +6,13 @@ const EditExercisePage = () => {
   const navigate = useNavigate();
   const [exercise, setExercise] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (state?.exercise) {
       const { date } = state.exercise;
 
-      
+      // Convert MM-DD-YY to YYYY-MM-DD for input
       const [month, day, year] = date.split('-');
       const formattedDate = `20${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
@@ -31,7 +33,6 @@ const EditExercisePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     const [year, month, day] = exercise.date.split('-');
     const shortDate = `${month}-${day}-${year.slice(-2)}`;
 
@@ -43,10 +44,8 @@ const EditExercisePage = () => {
       date: shortDate,
     };
 
-    console.log('Sending updated exercise:', updated);
-
     try {
-      const res = await fetch(`/exercises/${exercise._id}`, {
+      const res = await fetch(`${API_URL}/exercises/${exercise._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updated),
@@ -57,7 +56,6 @@ const EditExercisePage = () => {
         navigate('/');
       } else {
         const error = await res.json();
-        console.error('Backend error:', error);
         alert('Failed to update exercise: ' + (error?.Error || res.status));
       }
     } catch (err) {
