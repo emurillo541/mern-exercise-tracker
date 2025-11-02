@@ -22,12 +22,12 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests like Postman
-    if (allowedOrigins.includes(origin)) {
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow server-to-server requests
+    if (allowedOrigins.some(o => origin.startsWith(o))) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error(`CORS not allowed for origin: ${origin}`));
     }
   },
 }));
