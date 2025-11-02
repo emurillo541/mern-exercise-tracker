@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config.js';
 
 const CreateExercisePage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const CreateExercisePage = () => {
     };
 
     try {
-      const res = await fetch('/exercises', {
+      const res = await fetch(`${API_BASE_URL}/exercises`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

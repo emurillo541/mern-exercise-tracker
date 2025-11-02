@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ExerciseTable from '../components/ExerciseTable.jsx';
+import { API_BASE_URL } from '../config.js';
 
 const HomePage = () => {
   const [exercises, setExercises] = useState([]);
 
   const fetchExercises = async () => {
     try {
-      const res = await fetch('/exercises');
+      const res = await fetch(`${API_BASE_URL}/exercises`);
       const data = await res.json();
       setExercises(data);
     } catch (e) {
@@ -19,7 +20,7 @@ const HomePage = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`/exercises/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/exercises/${id}`, {
         method: 'DELETE',
       });
 
@@ -27,15 +28,12 @@ const HomePage = () => {
         let errData = {};
         try {
           errData = await response.json();
-        } catch (_) {
-        
-        }
+        } catch (_) {}
         console.error('Failed to delete exercise:', errData);
         alert("Failed to delete exercise: " + (errData?.Error || response.status));
         return;
       }
 
-      
       setExercises((prev) => prev.filter((e) => String(e._id) !== String(id)));
     } catch (err) {
       console.error('Delete error:', err);
