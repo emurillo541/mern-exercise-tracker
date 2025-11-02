@@ -1,6 +1,8 @@
+
 import 'dotenv/config';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
+import cors from 'cors';
 import {
 connect,
 createExercise,
@@ -13,6 +15,10 @@ deleteExerciseById
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+origin: '[https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app](https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app)'
+}));
 
 function isDateValid(date) {
 const format = /^\d\d-\d\d-\d\d$/;
