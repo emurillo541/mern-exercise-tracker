@@ -26,7 +26,3 @@ This project demonstrates full-stack development skills, including building a RE
 - Navigation between pages using React Router
 - Lifting state / useContext used to manage data flow
 - Fully functional SPA with asynchronous fetch API calls
-
----
-
-## Folder Structure
