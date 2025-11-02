@@ -1,1 +1,0 @@
-export const API_BASE_URL = 'https://mern-exercise-tracker-gi3a.onrender.com';
