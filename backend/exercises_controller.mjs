@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
+import cors from 'cors'; // <-- add this
 import {
   connect,
   createExercise,
@@ -12,6 +13,13 @@ import {
 
 const PORT = process.env.PORT;
 const app = express();
+
+// Add CORS middleware
+app.use(cors({
+  origin: 'https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app', // replace with your frontend URL
+  methods: ['GET','POST','PUT','DELETE']
+}));
+
 app.use(express.json());
 
 function isDateValid(date) {
@@ -47,7 +55,6 @@ function validateRequest(body) {
   return true;
 }
 
-
 app.post('/exercises', asyncHandler(async (req, res) => {
   if (!validateRequest(req.body)) {
     return res.status(400).json({ Error: "Invalid request" });
@@ -57,12 +64,10 @@ app.post('/exercises', asyncHandler(async (req, res) => {
   res.status(201).json(newExercise);
 }));
 
-
 app.get('/exercises', asyncHandler(async (req, res) => {
   const allExercises = await getAllExercises();
   res.status(200).json(allExercises);
 }));
-
 
 app.get('/exercises/:_id', asyncHandler(async (req, res) => {
   const doc = await getExerciseById(req.params._id);
@@ -71,7 +76,6 @@ app.get('/exercises/:_id', asyncHandler(async (req, res) => {
   }
   res.status(200).json(doc);
 }));
-
 
 app.put('/exercises/:_id', asyncHandler(async (req, res) => {
   if (!validateRequest(req.body)) {
@@ -85,7 +89,6 @@ app.put('/exercises/:_id', asyncHandler(async (req, res) => {
 
   res.status(200).json(updated);
 }));
-
 
 app.delete('/exercises/:id', asyncHandler(async (req, res) => {
   console.log('Deleting exercise with ID:', req.params.id);
