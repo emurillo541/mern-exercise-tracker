@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-origin: '[https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app](https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app)'
+  origin: 'https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app'
 }));
 
 function isDateValid(date) {
