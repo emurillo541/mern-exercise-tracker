@@ -15,18 +15,23 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
-const vercelRegex = new RegExp('^https://mern-exercise-tracker-[a-z0-9]+-emmanuel-murillos-projects\\.vercel\\.app$');
+const vercelRegex = /^https:\/\/mern-exercise-tracker-[a-z0-9]+-emmanuel-murillos-projects\.vercel\.app$/;
 
 app.use(cors({
-origin: function(origin, callback) {
-if (!origin) return callback(null, true);
-if (vercelRegex.test(origin)) {
-callback(null, true);
-} else {
-callback(new Error(`CORS not allowed for origin: ${origin}`));
-}
-}
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (
+      vercelRegex.test(origin) ||
+      origin === 'https://mern-exercise-tracker.vercel.app' 
+    ) {
+      callback(null, true);
+    } else {
+      console.error(`CORS not allowed for origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
 }));
+
 
 function isDateValid(date) {
 const format = /^\d\d-\d\d-\d\d$/;
