@@ -38,6 +38,17 @@ app.use(
   })
 );
 
+// 🎯 FIX: Added the new /auth-config endpoint here
+// This route is NOT protected by checkJwt and provides the necessary config to the frontend.
+app.get('/auth-config', (req, res) => {
+    // These environment variables MUST be set on your Render backend service.
+    res.json({
+        domain: process.env.AUTH0_DOMAIN,
+        clientId: process.env.AUTH0_CLIENT_ID,
+        audience: process.env.AUTH0_AUDIENCE
+    });
+});
+
 const checkJwt = auth({
   issuerBaseURL: process.env.AUTH0_ISSUER_URL,
   audience: process.env.AUTH0_AUDIENCE,
