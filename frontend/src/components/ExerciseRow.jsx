@@ -36,7 +36,8 @@ const ExerciseRow = ({ exercise, onDelete }) => {
             />
           </>
         ) : (
-           
+          
+          '—'
         )}
       </td>
     </tr>
