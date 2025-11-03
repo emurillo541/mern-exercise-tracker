@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ExerciseTable from '../components/ExerciseTable.jsx';
+import { API_BASE_URL } from '../config.js';
 
 const HomePage = () => {
   const [exercises, setExercises] = useState([]);
-  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchExercises = async () => {
       try {
-        const res = await fetch(`${API_URL}/exercises`);
+        const res = await fetch(`${API_BASE_URL}/exercises`);
         if (!res.ok) throw new Error('Failed to fetch exercises');
         const data = await res.json();
         setExercises(data);
@@ -19,13 +19,13 @@ const HomePage = () => {
     };
 
     fetchExercises();
-  }, [API_URL]);
+  }, []);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this exercise?')) return;
 
     try {
-      const res = await fetch(`${API_URL}/exercises/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE_URL}/exercises/${id}`, { method: 'DELETE' });
       if (res.status === 204) {
         setExercises(exercises.filter((ex) => ex._id !== id));
         alert('Deleted successfully');

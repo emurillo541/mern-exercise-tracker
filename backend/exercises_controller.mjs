@@ -15,21 +15,22 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
-// Allow multiple Vercel frontend URLs
+import cors from 'cors';
+
 const allowedOrigins = [
-  'https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app',
   'https://mern-exercise-tracker-5bmk61n4n-emmanuel-murillos-projects.vercel.app',
+  'https://mern-exercise-tracker-nbbsjklww-emmanuel-murillos-projects.vercel.app',
 ];
 
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow server-to-server requests
-    if (allowedOrigins.some(o => origin.startsWith(o))) {
+    if (!origin) return callback(null, true); // allow Postman / non-browser
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error(`CORS not allowed for origin: ${origin}`));
+      callback(new Error('Not allowed by CORS'));
     }
-  },
+  }
 }));
 
 function isDateValid(date) {

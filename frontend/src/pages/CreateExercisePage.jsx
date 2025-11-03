@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config.js';
 
 const CreateExercisePage = () => {
   const navigate = useNavigate();
@@ -11,15 +12,12 @@ const CreateExercisePage = () => {
     date: '',
   });
 
-  const API_URL = import.meta.env.VITE_API_URL;
-
   const handleChange = (e) => {
     setExercise({ ...exercise, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const [year, month, day] = exercise.date.split('-');
     const shortDate = `${month}-${day}-${year.slice(-2)}`;
 
@@ -32,7 +30,7 @@ const CreateExercisePage = () => {
     };
 
     try {
-      const res = await fetch(`${API_URL}/exercises`, {
+      const res = await fetch(`${API_BASE_URL}/exercises`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -40,6 +38,7 @@ const CreateExercisePage = () => {
 
       if (res.status === 201) {
         alert('Exercise created successfully!');
+        navigate('/');
       } else {
         const error = await res.json();
         alert('Failed to create exercise: ' + (error?.Error || res.status));
@@ -48,37 +47,22 @@ const CreateExercisePage = () => {
       console.error('Create error:', err);
       alert('Failed to create exercise.');
     }
-
-    navigate('/');
   };
 
   return (
     <section>
       <h2>Create Exercise</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input name="name" value={exercise.name} onChange={handleChange} required />
-        </label>
-        <label>
-          Reps:
-          <input type="number" name="reps" value={exercise.reps} onChange={handleChange} required />
-        </label>
-        <label>
-          Weight:
-          <input type="number" name="weight" value={exercise.weight} onChange={handleChange} required />
-        </label>
-        <label>
-          Unit:
+        <label>Name: <input name="name" value={exercise.name} onChange={handleChange} required /></label>
+        <label>Reps: <input type="number" name="reps" value={exercise.reps} onChange={handleChange} required /></label>
+        <label>Weight: <input type="number" name="weight" value={exercise.weight} onChange={handleChange} required /></label>
+        <label>Unit:
           <select name="unit" value={exercise.unit} onChange={handleChange} required>
             <option value="lbs">lbs</option>
             <option value="kgs">kgs</option>
           </select>
         </label>
-        <label>
-          Date:
-          <input type="date" name="date" value={exercise.date} onChange={handleChange} required />
-        </label>
+        <label>Date: <input type="date" name="date" value={exercise.date} onChange={handleChange} required /></label>
         <button type="submit">Create</button>
       </form>
     </section>
