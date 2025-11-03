@@ -15,12 +15,11 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
-// Regex to match all Vercel frontend deployments
-const vercelRegex = /^https://mern-exercise-tracker-[a-z0-9]+-emmanuel-murillos-projects.vercel.app$/;
+const vercelRegex = new RegExp('^https://mern-exercise-tracker-[a-z0-9]+-emmanuel-murillos-projects\\.vercel\\.app$');
 
 app.use(cors({
 origin: function(origin, callback) {
-if (!origin) return callback(null, true); // allow non-browser requests like Postman
+if (!origin) return callback(null, true);
 if (vercelRegex.test(origin)) {
 callback(null, true);
 } else {
