@@ -36,8 +36,10 @@ const App = () => (
     <main>
       <Routes>
         
+        {/* PUBLIC ROUTE: Homepage is viewable by all users */}
         <Route path="/" element={<HomePage />} /> 
 
+        {/* PROTECTED ROUTES: Require authentication */}
         <Route
           path="/create"
           element={
