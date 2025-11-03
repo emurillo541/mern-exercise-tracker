@@ -7,6 +7,8 @@ let connection;
 
 
 const exerciseSchema = new mongoose.Schema({
+  ownerId: { type: String, required: true, index: true }, 
+  
   name: { type: String, required: true },
   reps: { type: Number, required: true },
   weight: { type: Number, required: true },
@@ -29,27 +31,30 @@ async function connect() {
   }
 }
 
-
-async function createExercise(data) {
-  const newExercise = new Exercise(data);
+async function createExercise(data, ownerId) {
+  const newExercise = new Exercise({ ...data, ownerId });
   return await newExercise.save();
 }
 
-async function getAllExercises() {
-  return await Exercise.find({});
+async function getAllExercises(ownerId) {
+  return await Exercise.find({ ownerId });
 }
 
-async function getExerciseById(id) {
-  return await Exercise.findById(id);
+async function getExerciseById(id, ownerId) {
+  return await Exercise.findOne({ _id: id, ownerId });
 }
 
-async function updateExerciseById(id, data) {
-  return await Exercise.findByIdAndUpdate(id, data, { new: true });
+async function updateExerciseById(id, data, ownerId) {
+  return await Exercise.findOneAndUpdate(
+    { _id: id, ownerId }, 
+    data, 
+    { new: true }
+  );
 }
 
-async function deleteExerciseById(id) {
+async function deleteExerciseById(id, ownerId) {
   if (!mongoose.Types.ObjectId.isValid(id)) return null;
-  return await Exercise.findByIdAndDelete(id);
+  return await Exercise.findOneAndDelete({ _id: id, ownerId });
 }
 
 export {
