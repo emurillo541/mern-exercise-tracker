@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../config.js';
+import { API_BASE_URL } from '../config.js'; // make sure this is defined
 
 const EditExercisePage = () => {
   const { state } = useLocation();
@@ -10,7 +10,7 @@ const EditExercisePage = () => {
   useEffect(() => {
     if (state?.exercise) {
       const [month, day, year] = state.exercise.date.split('-');
-      const formattedDate = `20${year}-${month}-${day}`;
+      const formattedDate = `20${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
       setExercise({ ...state.exercise, date: formattedDate });
     } else {
       alert('No exercise to edit');
@@ -27,15 +27,24 @@ const EditExercisePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Convert YYYY-MM-DD -> MM-DD-YY
     const [year, month, day] = exercise.date.split('-');
-    const shortDate = `${month}-${day}-${year.slice(-2)}`;
-    const updated = { ...exercise, reps: parseInt(exercise.reps), weight: parseInt(exercise.weight), date: shortDate };
+    const shortDate = `${month.padStart(2,'0')}-${day.padStart(2,'0')}-${year.slice(-2)}`;
+
+    const payload = {
+      name: exercise.name.trim(),
+      reps: parseInt(exercise.reps, 10),
+      weight: parseInt(exercise.weight, 10),
+      unit: exercise.unit,
+      date: shortDate
+    };
 
     try {
       const res = await fetch(`${API_BASE_URL}/exercises/${exercise._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated),
+        body: JSON.stringify(payload),
       });
 
       if (res.status === 200) {
