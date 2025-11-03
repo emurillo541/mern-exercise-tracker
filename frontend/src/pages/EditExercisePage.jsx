@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import { useExercisesApi } from '../apiService.js'; 
-
 
 const EditExercisePage = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const [exercise, setExercise] = useState(null);
-    
-    
     const { updateExercise } = useExercisesApi(); 
 
     useEffect(() => {
         if (state?.exercise) {
-            
             const [month, day, year] = state.exercise.date.split('-');
             const formattedDate = `20${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
             setExercise({ ...state.exercise, date: formattedDate });
@@ -34,7 +29,6 @@ const EditExercisePage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        
         const [year, month, day] = exercise.date.split('-');
         const shortDate = `${month.padStart(2,'0')}-${day.padStart(2,'0')}-${year.slice(-2)}`;
 
@@ -47,15 +41,11 @@ const EditExercisePage = () => {
         };
 
         try {
-            
             await updateExercise(exercise._id, payload);
-
             alert('Exercise updated successfully!');
             navigate('/');
-            
         } catch (err) {
             console.error('Update error:', err);
-          
             alert('Failed to update exercise: ' + err.message);
         }
     };
