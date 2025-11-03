@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-const EXERCISE_DB_NAME = 'exercise_db';
-
 let connection;
 
 
@@ -21,9 +19,7 @@ const Exercise = mongoose.model('Exercise', exerciseSchema);
 
 async function connect() {
   try {
-    connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING, {
-      dbName: EXERCISE_DB_NAME
-    });
+    connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING);
     console.log("Successfully connected to MongoDB using Mongoose!");
   } catch (err) {
     console.log(err);

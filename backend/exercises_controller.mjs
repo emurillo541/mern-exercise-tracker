@@ -31,7 +31,7 @@ app.use(
         callback(null, true);
       } else {
         console.error(`CORS not allowed for origin: ${origin}`);
-        callback(new Error("Not allowed by CORS"));
+        callback(null, false); 
       }
     },
     credentials: true,
@@ -110,12 +110,12 @@ app.put('/exercises/:_id', asyncHandler(async (req, res) => {
   res.status(200).json(updated);
 }));
 
-app.delete('/exercises/:id', asyncHandler(async (req, res) => {
-  console.log('Attempting to delete exercise with ID:', req.params.id);
+app.delete('/exercises/:_id', asyncHandler(async (req, res) => {
+  console.log('Attempting to delete exercise with ID:', req.params._id);
   
   const userId = req.auth.payload.sub;
   
-  const deleted = await deleteExerciseById(req.params.id, userId);
+  const deleted = await deleteExerciseById(req.params._id, userId);
   
   if (!deleted) return res.status(404).json({ Error: "Not found or not authorized" });
   res.sendStatus(204);

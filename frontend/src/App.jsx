@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navigation from './components/Navigation.jsx';
@@ -8,17 +8,21 @@ import EditExercisePage from './pages/EditExercisePage.jsx';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
-  
   const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
 
-  if (isLoading) return <div>Loading...</div>; 
+  if (isLoading) return <div>Loading...</div>;
 
-  if (!isAuthenticated) {
-    loginWithRedirect();
-    return <div>Redirecting to login...</div>;
+  useLayoutEffect(() => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isAuthenticated, loginWithRedirect]);
+
+  if (isAuthenticated) {
+    return children;
   }
 
-  return children;
+  return <div>Redirecting to login...</div>;
 };
 
 const App = () => (
@@ -31,14 +35,8 @@ const App = () => (
 
     <main>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          }
-        />
+        
+        <Route path="/" element={<HomePage />} /> 
 
         <Route
           path="/create"
@@ -58,7 +56,6 @@ const App = () => (
           }
         />
 
-        {/* Catch-all route for unmatched paths */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </main>
