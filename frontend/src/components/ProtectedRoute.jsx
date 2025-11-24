@@ -8,16 +8,15 @@ const ProtectedRoute = ({ children }) => {
 
   useLayoutEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      
       loginWithRedirect();
     }
-  }, [isLoading, isAuthenticated, loginWithRedirect]); 
+  }, [isLoading, isAuthenticated, loginWithRedirect]);
 
   if (isAuthenticated) {
     return children;
   }
 
-  return <div>Redirecting to login...</div>; 
+  return <div>Redirecting to login...</div>;
 };
 
 export default ProtectedRoute;

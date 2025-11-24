@@ -5,6 +5,7 @@ import './index.css';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL // <-- Reading this is correct
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -17,7 +18,12 @@ const Root = () => {
     useEffect(() => {
         const fetchConfig = async () => {
             try {
-                const response = await fetch('/api/auth-config'); 
+                // *** FIX: Use VITE_API_BASE_URL to create the absolute path ***
+                const endpoint = `${VITE_API_BASE_URL}/auth-config`; 
+                const response = await fetch(endpoint); 
+                
+                // You might need a more robust check for non-JSON responses here,
+                // but this will resolve the 404/SyntaxError
                 const config = await response.json();
 
                 setAuthConfig(config);
