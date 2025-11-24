@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navigation from './components/Navigation.jsx';
@@ -9,15 +9,12 @@ import './App.css';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
-
   if (isLoading) return <div>Loading...</div>;
-
-  useLayoutEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
       loginWithRedirect();
     }
-}, [isLoading, isAuthenticated, loginWithRedirect]);
-
+  }, [isAuthenticated, isLoading, loginWithRedirect]);
   if (isAuthenticated) {
     return children;
   }
@@ -35,11 +32,7 @@ const App = () => (
 
     <main>
       <Routes>
-        
-        {/* PUBLIC ROUTE: Homepage is viewable by all users */}
-        <Route path="/" element={<HomePage />} /> 
-
-        {/* PROTECTED ROUTES: Require authentication */}
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/create"
           element={
@@ -57,7 +50,6 @@ const App = () => (
             </ProtectedRoute>
           }
         />
-
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </main>

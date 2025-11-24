@@ -10,8 +10,6 @@ const Navigation = () => {
     <nav>
       <ul>
         <li><Link to="/">Home</Link></li>
-        
-        {/* Conditional Rendering: Only show if the user is authenticated */}
         {isAuthenticated && (
           <li><Link to="/create">Create Exercise</Link></li>
         )}

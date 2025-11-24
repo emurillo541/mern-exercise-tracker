@@ -1,10 +1,5 @@
 {
-  "rewrites": [
-    {
-      "source": "/api/exercises/(.*)",
-      "destination": "${BACKEND_URL}/exercises/$1" 
-    }
-  ],
+  "rewrites": [], 
   "builds": [
     {
       "src": "frontend/package.json",

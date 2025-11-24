@@ -23,7 +23,6 @@ const ExerciseRow = ({ exercise, onDelete }) => {
       <td>{exercise.unit}</td>
       <td>{exercise.date}</td>
       <td>
-        {/* Conditional Rendering: Only show buttons if the user is logged in */}
         {isAuthenticated ? (
           <>
             <FaEdit 
