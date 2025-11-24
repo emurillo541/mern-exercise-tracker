@@ -1,44 +1,70 @@
-nav {
+.navbar {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  max-width: 1280px;
-  margin: 0 auto 2rem auto;
+  background-color: #f0f4ff; /* light background for navbar */
   padding: 1rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  padding: 0;
-  margin: 0;
-}
-
-nav li a {
+.nav-left a,
+.nav-right button {
+  margin-right: 1rem;
   text-decoration: none;
-  font-weight: bold;
-  color: #333;
-  padding: 0.5rem 1rem;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-nav li a:hover {
-  border-bottom: 2px solid #0070f3;
+  font-weight: 500;
+  color: #1a1a1a;
 }
 
 .home-button {
-  color: #0070f3;
-  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background-color: #0070f3; /* blue background */
+  color: white;
+  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
 .home-button:hover {
-  color: #005bb5;
-  border-bottom: 2px solid #005bb5;
+  background-color: #005ac1;
 }
 
-.auth-buttons {
-  display: flex;
-  gap: 1rem;
+.create-button {
+  padding: 0.5rem 1rem;
+  background-color: #21ba45; /* green for create */
+  color: white;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.create-button:hover {
+  background-color: #16a43c;
+}
+
+.nav-right button {
+  padding: 0.5rem 1rem;
+  background-color: #0070f3; /* same blue as home */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nav-right button:hover {
+  background-color: #005ac1;
+}
+
+.home-unauthenticated {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #333;
+}
+
+.home-unauthenticated h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.home-unauthenticated p {
+  font-size: 1.2rem;
 }

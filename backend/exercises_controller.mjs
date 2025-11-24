@@ -18,8 +18,7 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  "https://mern-exercise-tracker-topaz.vercel.app",
-  "http://localhost:5173",
+  "https://mern-exercise-tracker-topaz.vercel.app"
 ];
 const vercelRegex = /^https:\/\/mern-exercise-tracker-[a-z0-9]+-.*\.vercel\.app$/;
 
