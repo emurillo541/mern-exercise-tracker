@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ExerciseTable from '../components/ExerciseTable.jsx';
 
-import { useExercisesApi } from '../apiService.js'; 
+import { useExercisesApi } from '../../api/apiService.js'; 
 
 
 const HomePage = () => {

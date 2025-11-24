@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useExercisesApi } from '../apiService.js'; 
+import { useExercisesApi } from '../../api/apiService.js'; 
 
 const EditExercisePage = () => {
     const { state } = useLocation();

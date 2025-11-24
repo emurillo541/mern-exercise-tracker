@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useExercisesApi } from '../apiService.js';
+import { useExercisesApi } from '../../api/apiService.js';
 
 const CreateExercisePage = () => {
   const navigate = useNavigate();
