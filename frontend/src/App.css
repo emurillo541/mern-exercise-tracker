@@ -1,27 +1,47 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  background-color: #f0f4ff; /* light background for navbar */
   padding: 1rem 2rem;
+  background-color: #f0f4ff;
   border-radius: 8px;
   margin-bottom: 2rem;
 }
 
-.nav-left a,
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.home-button,
+.create-button,
 .nav-right button {
-  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: white;
   text-decoration: none;
   font-weight: 500;
-  color: #1a1a1a;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .home-button {
-  padding: 0.5rem 1rem;
-  background-color: #0070f3; /* blue background */
-  color: white;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+  background-color: #0070f3;
 }
 
 .home-button:hover {
@@ -29,11 +49,7 @@
 }
 
 .create-button {
-  padding: 0.5rem 1rem;
-  background-color: #21ba45; /* green for create */
-  color: white;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+  background-color: #21ba45;
 }
 
 .create-button:hover {
@@ -41,30 +57,9 @@
 }
 
 .nav-right button {
-  padding: 0.5rem 1rem;
-  background-color: #0070f3; /* same blue as home */
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: #0070f3;
 }
 
 .nav-right button:hover {
   background-color: #005ac1;
-}
-
-.home-unauthenticated {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #333;
-}
-
-.home-unauthenticated h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.home-unauthenticated p {
-  font-size: 1.2rem;
 }

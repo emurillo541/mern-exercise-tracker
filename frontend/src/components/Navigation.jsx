@@ -1,24 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react'; 
+import { useAuth0 } from '@auth0/auth0-react';
 import AuthButtons from './AuthButtons.jsx';
+import './App.css';
 
 const Navigation = () => {
-  const { isAuthenticated } = useAuth0(); 
-  
+  const { isAuthenticated } = useAuth0();
+
   return (
-    <nav>
-      <ul>
-      <li>
+    <nav className="navbar">
+      <div className="nav-left">
+        {isAuthenticated && (
+          <Link to="/create" className="create-button">
+            Create Exercise
+          </Link>
+        )}
+      </div>
+
+      <div className="nav-center">
         <Link to="/" className="home-button">
           Home
         </Link>
-      </li>
-        {isAuthenticated && (
-          <li><Link to="/create">Create Exercise</Link></li>
-        )}
-      </ul>
-      <div className="auth-buttons">
+      </div>
+
+      <div className="nav-right">
         <AuthButtons />
       </div>
     </nav>

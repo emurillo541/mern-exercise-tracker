@@ -14,16 +14,10 @@ const ProtectedRoute = ({ children }) => {
   if (isLoading) return <div>Loading...</div>;
 
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) {
-      loginWithRedirect();
-    }
+    if (!isAuthenticated && !isLoading) loginWithRedirect();
   }, [isAuthenticated, isLoading, loginWithRedirect]);
 
-  if (isAuthenticated) {
-    return children;
-  }
-
-  return <div>Redirecting to login...</div>;
+  return isAuthenticated ? children : <div>Redirecting to login...</div>;
 };
 
 const App = () => {
@@ -32,19 +26,27 @@ const App = () => {
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      getAllExercises()
-        .then(data => setExercises(data))
-        .catch(err => console.error('Failed to fetch exercises:', err));
-    } else {
+    if (!isAuthenticated) {
       setExercises([]);
+      return;
     }
+
+    const fetchExercises = async () => {
+      try {
+        const data = await getAllExercises();
+        setExercises(data);
+      } catch (err) {
+        console.error('Failed to fetch exercises:', err);
+      }
+    };
+
+    fetchExercises();
   }, [isAuthenticated, getAllExercises]);
 
   const handleDelete = async (id) => {
     try {
       await deleteExercise(id);
-      setExercises(prev => prev.filter(ex => ex._id !== id));
+      setExercises((prev) => prev.filter((ex) => ex._id !== id));
     } catch (err) {
       console.error('Delete failed:', err);
       alert('Failed to delete exercise');
@@ -63,9 +65,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              <HomePage exercises={exercises} onDelete={handleDelete} />
-            }
+            element={<HomePage exercises={exercises} onDelete={handleDelete} />}
           />
 
           <Route
