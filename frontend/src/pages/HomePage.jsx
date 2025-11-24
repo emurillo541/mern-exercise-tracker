@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ExerciseTable from '../components/ExerciseTable.jsx';
-
 import { useExercisesApi } from '../../api/apiService.js'; 
 
 

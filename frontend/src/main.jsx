@@ -7,6 +7,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -14,11 +15,11 @@ const root = createRoot(container);
 const Root = () => {
   const redirectUri = window.location.origin;
 
-  if (!domain || !clientId) {
+  if (!domain || !clientId || !backendUrl) {
     return (
       <div>
-        Missing Auth0 configuration.  
-        Check your Vercel environment variables.
+        Missing configuration.  
+        Check your Vercel environment variables for Auth0 and Backend URL.
       </div>
     );
   }
@@ -30,7 +31,7 @@ const Root = () => {
         clientId={clientId}
         authorizationParams={{
           redirect_uri: redirectUri,
-          ...(audience && { audience }) 
+          ...(audience && { audience }),
         }}
       >
         <App />
