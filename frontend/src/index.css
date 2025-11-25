@@ -1,16 +1,16 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   background-color: #f5f7fa;
-  color: #1f2937; 
+  color: #1f2937;
   margin: 0;
   padding: 0;
   line-height: 1.5;
 }
 
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
@@ -20,9 +20,11 @@ body {
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -42,7 +44,7 @@ body {
   padding: 2em;
   border-radius: 8px;
   background-color: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
 }
 
 .read-the-docs {
