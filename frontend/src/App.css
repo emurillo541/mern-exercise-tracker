@@ -1,17 +1,22 @@
-/* ==================================== */
-/* 1. NAVIGATION BAR STYLES */
-/* ==================================== */
-
 .navbar {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 0; 
+    background: #172554; 
+    color: white;
+    border-radius: 0; 
+    margin-bottom: 4rem; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-inner-wrapper {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    padding: 1rem 2rem;
-    background: #1e3a8a;
-    color: white;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: 90%; 
+    max-width: 1200px; 
+    padding: 1rem 0; 
 }
 
 .nav-left,
@@ -23,95 +28,95 @@
 
 .nav-left a,
 .nav-right button {
-    color: white;
-    font-weight: bold;
+    font-weight: 500; 
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: none;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease-in-out; 
 }
 
 .nav-left .nav-link {
-    padding: 0;
-    background: none;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    color: white; 
+    font-size: 1.1em;
+    padding: 0.5rem;
+}
+
+.nav-left .nav-link:hover {
+    color: #4CAF50; 
 }
 
 .create-button {
-    background-color: #00bcd4;
+    background-color: #4CAF50; 
+    color: white;
+    padding: 0.6rem 1.5rem; 
+    border-radius: 40px; 
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .create-button:hover {
-    background-color: #0097a7;
+    background-color: #43A047;
+    transform: translateY(-1px); 
 }
 
 .nav-right button {
-    background-color: #ff9800;
+    background-color: #FFA000; 
+    color: #1f2937; 
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px; 
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .nav-right button:hover {
-    background-color: #fb8c00;
+    background-color: #FFB300;
+    transform: translateY(-1px);
 }
-
-/* ==================================== */
-/* 2. APP TITLE & GENERAL LAYOUT */
-/* ==================================== */
 
 .app-title-container {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 3rem; 
+    margin-top: 0;
+    margin-bottom: 5rem; 
 }
 
 .app-title-container h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 0.25rem;
+    font-size: 3.5rem; 
+    font-weight: 900; 
+    margin-bottom: 0.5rem;
     color: #1f2937;
+    letter-spacing: -0.5px; 
 }
 
 .app-title-container p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #6b7280;
+    font-weight: 300; 
 }
 
-/* ==================================== */
-/* 3. HOME WELCOME SECTION & FOOTER */
-/* ==================================== */
-
 .home-unauthenticated {
-    text-align: center;
-    max-width: 600px;
-    margin: 4rem auto; 
-    padding: 2rem;
+    max-width: 650px;
+    margin: 0 auto; 
+    padding: 3rem 2rem; 
     border-radius: 12px;
-    background-color: white; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    background-color: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
 }
 
 .home-unauthenticated h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .home-unauthenticated p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #6b7280;
 }
 
 footer {
-    margin-top: 6rem;
+    margin-top: 6rem; 
     padding: 2rem 0;
     text-align: center;
     color: #6b7280;
 }
-
-/* ==================================== */
-/* 4. FORM & TABLE STYLES (Existing) */
-/* ==================================== */
 
 table {
     width: 100%;
@@ -139,8 +144,8 @@ form {
 }
 
 input, select, button {
-    font-family: Arial, sans-serif;
-    padding: 0.5rem;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    padding: 0.75rem; 
     font-size: 1rem;
     border-radius: 6px;
     border: 1px solid #d1d5db;
@@ -150,6 +155,7 @@ form button {
     background-color: #3b82f6;
     color: white;
     border: none;
+    font-weight: bold;
 }
 
 form button:hover {

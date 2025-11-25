@@ -9,21 +9,24 @@ const Navigation = () => {
 
   return (
     <nav className="navbar">
-      <div className="nav-left">
-        <Link to="/" className="nav-link"> 
-          Home
-        </Link>
-        
-        {isAuthenticated && (
-          <Link to="/create" className="create-button">
-            Create Exercise
-          </Link>
-        )}
-      </div> 
-      <div className="nav-right">
-        <AuthButtons />
-      </div>
+        <div className="nav-inner-wrapper">
+          <div className="nav-left">
+            <Link to="/" className="nav-link"> 
+              Home
+            </Link>
+
+            {isAuthenticated && (
+              <Link to="/create" className="create-button">
+                Create Exercise
+              </Link>
+            )}
+          </div>
+          <div className="nav-right">
+            <AuthButtons />
+          </div>
+        </div>
     </nav>
   );
 };
+
 export default Navigation;
