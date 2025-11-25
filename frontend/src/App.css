@@ -1,9 +1,10 @@
 .navbar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #f0f4ff;
+  background: #1e3a8a; 
+  color: white;
   border-radius: 8px;
   margin-bottom: 2rem;
 }
@@ -12,54 +13,103 @@
 .nav-right {
   display: flex;
   align-items: center;
+  gap: 1rem; 
 }
 
-.nav-left {
-  justify-content: flex-start;
-}
-
-.nav-center {
-  display: flex;
-  justify-content: center;
-}
-
-.nav-right {
-  justify-content: flex-end;
-}
-
-.home-button,
-.create-button,
+.nav-left a,
 .nav-right button {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
+/* Buttons */
 .home-button {
-  background-color: #0070f3;
+  background-color: #3b82f6;
 }
-
 .home-button:hover {
-  background-color: #005ac1;
+  background-color: #2563eb;
 }
 
 .create-button {
-  background-color: #21ba45;
+  background-color: #10b981; 
 }
-
 .create-button:hover {
-  background-color: #16a43c;
+  background-color: #059669;
 }
 
 .nav-right button {
-  background-color: #0070f3;
+  background-color: #3b82f6;
+}
+.nav-right button:hover {
+  background-color: #2563eb;
 }
 
-.nav-right button:hover {
-  background-color: #005ac1;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+th {
+  background-color: #f3f4f6;
+}
+
+form {
+  max-width: 500px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input, select, button {
+  font-family: Arial, sans-serif;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+form button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+}
+form button:hover {
+  background-color: #2563eb;
+}
+
+footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  text-align: center;
+  color: #6b7280;
+}
+
+.home-unauthenticated {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #1f2937;
+}
+
+.home-unauthenticated h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.home-unauthenticated p {
+  font-size: 1.2rem;
 }
