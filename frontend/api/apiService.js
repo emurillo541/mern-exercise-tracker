@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
-const API_BASE_PATH = `${API_BASE_URL}/exercises`;
+const API_BASE_PATH = `${API_BASE_URL}exercises`;
 
 export const useExercisesApi = () => {
     const { getAccessTokenSilently } = useAuth0();
