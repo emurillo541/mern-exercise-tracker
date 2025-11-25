@@ -5,7 +5,7 @@ import Navigation from './components/Navigation.jsx';
 import HomePage from './pages/HomePage.jsx';
 import CreateExercisePage from './pages/CreateExercisePage.jsx';
 import EditExercisePage from './pages/EditExercisePage.jsx';
-import { useExercisesApi } from './apiService.js';
+import { useExercisesApi } from '../api/apiService.js';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
