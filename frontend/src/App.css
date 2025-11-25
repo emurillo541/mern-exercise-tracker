@@ -1,115 +1,157 @@
+/* ==================================== */
+/* 1. NAVIGATION BAR STYLES */
+/* ==================================== */
+
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #1e3a8a; 
-  color: white;
-  border-radius: 8px;
-  margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #1e3a8a;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .nav-left,
 .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem; 
+    display: flex;
+    align-items: center;
+    gap: 2rem; 
 }
 
 .nav-left a,
 .nav-right button {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-/* Buttons */
-.home-button {
-  background-color: #3b82f6;
-}
-.home-button:hover {
-  background-color: #2563eb;
+.nav-left .nav-link {
+    padding: 0;
+    background: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 .create-button {
-  background-color: #10b981; 
+    background-color: #00bcd4;
 }
+
 .create-button:hover {
-  background-color: #059669;
+    background-color: #0097a7;
 }
 
 .nav-right button {
-  background-color: #3b82f6;
+    background-color: #ff9800;
 }
+
 .nav-right button:hover {
-  background-color: #2563eb;
+    background-color: #fb8c00;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 2rem 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+/* ==================================== */
+/* 2. APP TITLE & GENERAL LAYOUT */
+/* ==================================== */
+
+.app-title-container {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem; 
 }
 
-th, td {
-  border: 1px solid #e5e7eb;
-  padding: 0.75rem;
-  text-align: center;
+.app-title-container h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+    color: #1f2937;
 }
 
-th {
-  background-color: #f3f4f6;
+.app-title-container p {
+    font-size: 1.2rem;
+    color: #6b7280;
 }
 
-form {
-  max-width: 500px;
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-input, select, button {
-  font-family: Arial, sans-serif;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-}
-
-form button {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-}
-form button:hover {
-  background-color: #2563eb;
-}
-
-footer {
-  margin-top: 4rem;
-  padding: 2rem 0;
-  text-align: center;
-  color: #6b7280;
-}
+/* ==================================== */
+/* 3. HOME WELCOME SECTION & FOOTER */
+/* ==================================== */
 
 .home-unauthenticated {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #1f2937;
+    text-align: center;
+    max-width: 600px;
+    margin: 4rem auto; 
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: white; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
 }
 
 .home-unauthenticated h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 .home-unauthenticated p {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
+    color: #6b7280;
+}
+
+footer {
+    margin-top: 6rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: #6b7280;
+}
+
+/* ==================================== */
+/* 4. FORM & TABLE STYLES (Existing) */
+/* ==================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+th {
+    background-color: #f3f4f6;
+}
+
+form {
+    max-width: 500px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input, select, button {
+    font-family: Arial, sans-serif;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
+
+form button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+}
+
+form button:hover {
+    background-color: #2563eb;
 }
